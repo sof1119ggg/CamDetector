@@ -1,1 +1,336 @@
-hello
+
++
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <title>CamDetector——一个基于无线网络流量分析的摄像头检测方案</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9ff;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        img {
+            width: 75%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        video {
+            width: 90%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+
+        h1,
+        h2 {
+            color: #0056b3;
+            font-weight: 300;
+        }
+
+        p,
+        li {
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 16px;
+        }
+
+        .math-formula {
+            font-family: 'Courier New', monospace;
+            font-style: normal;
+            background-color: #eeeeee;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        blockquote {
+            border-left: 4px solid #2a7fff;
+            margin: 1.5em 10px;
+            padding: 0.5em 20px;
+            color: #555;
+            background-color: #eeeeee;
+            border-radius: 5px;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .github-link img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .github-link a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CamDetector——一个基于无线网络流量分析的摄像头检测方案</h1>
+        <h4>第18届中国大学生计算机设计大赛 大数据应用-大数据实践赛 作品</h4>
+        <p class="github-link" style="text-align: center;">
+            <a href="https://github.com/sof1119ggg/CamDetector">
+                <img src="img/github-mark.png" alt="GitHub">
+                <span>项目代码</span>
+            </a>
+        </p>
+        <h2>项目立足方向</h2>
+<p>本作品聚焦于 智慧安防、智能社区、智能家居 等国家重点技术发展方向，紧贴“个人隐私保护”和“安全空间建设”两大核心诉求，应用于酒店民宿偷拍防范、办公区域泄密监测、公共空间隐私巡查等多类场景，致力于构建全民可用、无设备依赖、实时高效的智能摄像头感知防护体系。</p>
+<h2>项目背景</h2>
+<p>近年来，隐蔽摄像头滥用问题日益严峻：
+<img alt="alt text" src="image-3.png"/>
+• 偷拍事件频发，部分电商平台甚至公开售卖隐蔽摄像头；<br/>
+• 公众对隐私安全防范意识薄弱，仅21%的住客会主动检查房间；<br/>
+• 传统检测手段依赖硬件、误报率高、操作复杂，难以普及。<br/>
+与此同时，国家政策持续加码隐私安全立法：
+<img alt="" src="image-4.png"/>
+•《民法典》正式将偷拍纳入侵权范畴；<br/>
+• 个人信息保护法、生物识别安全规范等法规密集出台；<br/>
+• 市场与法规共同推动智能隐私防护技术快速落地。  </p>
+<h2>当前难点与挑战</h2>
+<p>我们调研并归纳出目前隐蔽摄像头防护领域的四大核心痛点：</p>
+
+<style>
+    .styled-table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      font-size: 16px;
+      min-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    .styled-table thead tr {
+      background-color: #007acc;
+      color: #ffffff;
+    }
+  
+    .styled-table th,
+    .styled-table td {
+      border: 1px solid #ddd;
+      padding: 12px 16px;
+    }
+  
+    .styled-table tbody tr:nth-child(even) {
+      background-color: #f3f3f3;
+    }
+  
+    .styled-table tbody tr:hover {
+      background-color: #eef6ff;
+    }
+  </style>
+  
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>现有方式</th>
+        <th>技术局限</th>
+        <th>用户痛点</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>红外检测</td>
+        <td>需夜视环境、遮挡易失效</td>
+        <td>不适用于日常环境</td>
+      </tr>
+      <tr>
+        <td>电磁检测</td>
+        <td>家电干扰大、误报率高</td>
+        <td>使用门槛高</td>
+      </tr>
+      <tr>
+        <td>Wi-Fi嗅探</td>
+        <td>无法区分设备类型</td>
+        <td>检测结果不明确</td>
+      </tr>
+      <tr>
+        <td>摄像头反光检查</td>
+        <td>主观性强</td>
+        <td>效率低，无法定位</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+<p><img alt="alt text" src="image-5.png"/>
+此外：<br/>
+• 多设备并存的复杂无线环境下，现有方法准确性不足；<br/>
+• 主流APP无法对摄像头进行有效追踪和精确定位；<br/>
+• 用户缺乏使用门槛低、实时性强的解决方案。  </p>
+<h2>我们的解决方案：CamDetector</h2>
+<p>为应对上述问题，我们提出了创新性的解决方案——CamDetector：基于Wi-Fi流量分析的摄像头检测与定位系统：</p>
+<h3>一、系统架构</h3>
+<p><img alt="alt text" src="image-6.png"/></p>
+<p><strong>三层架构详解</strong>
+<img alt="alt text" src="image-7.png"/></p>
+<h4>数据感知层</h4>
+<p>• 核心技术：基于Libpcap+Aircrack-ng双引擎抓包，支持802.11协议解析五级过滤流水线（CRC校验/MAC白名单等）<br/>
+• 输出：清洗后的结构化数据流  </p>
+<h4>数据处理层</h4>
+<style>
+    .styled-table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      font-size: 16px;
+      min-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    .styled-table thead tr {
+      background-color: #007acc;
+      color: #ffffff;
+    }
+  
+    .styled-table th,
+    .styled-table td {
+      border: 1px solid #ddd;
+      padding: 12px 16px;
+    }
+  
+    .styled-table tbody tr:nth-child(even) {
+      background-color: #f3f3f3;
+    }
+  
+    .styled-table tbody tr:hover {
+      background-color: #eef6ff;
+    }
+  
+    .styled-table code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+  
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>模块</th>
+        <th>技术实现</th>
+        <th>性能指标</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>感知模块</td>
+        <td>PLD特征分析（CDF量化）<br/>带宽稳定性检测（滑动窗口算法）</td>
+        <td>准确率 96.7%<br/>误报率 &lt; 3%</td>
+      </tr>
+      <tr>
+        <td>定位模块</td>
+        <td>比特率-距离模型：<br/><code>d = 0.0023 ΔB² + 0.15 ΔB + 1.2</code><br/>方向估计（SNR 空间梯度）</td>
+        <td>定位误差<br/>&lt; 0.5m @ 3m</td>
+      </tr>
+    </tbody>
+  </table>
+  
+<h4>应用交互层</h4>
+<p>• 动态引导：通过三色雷达图实时显示威胁方位（红=视野内，黄=邻近，绿=安全）<br>
+• 语音提示："检测到右前方2.3米存在摄像头"（支持多语言切换）  </br></p>
+<h3>二、核心功能</h3>
+<h4>智能感知：</h4>
+<p>• 无需解密内容，通过分析加密视频流的PLD分布特征和带宽稳定性，精准判断摄像头流量；<br>
+• 使用轻量化SVM分类器，对流量进行快速分类，准确率达96.7%。<br>
+<img alt="alt text" src="image-8.png"/></br></br></p>
+<h4>精准定位：</h4>
+<p>• 基于用户移动引发的比特率变化，推断其是否进入摄像头视野；<br>
+• 结合传感器数据（加速度+SNR）实现方向与距离联合估计；<br>
+• 在3米范围内定位误差小于0.48米，方向误差小于4.2°。<br/>
+<img alt="alt text" src="image-9.png"/></br></br></p>
+<h4>移动端无感部署：</h4>
+<p>• 仅依赖智能手机本身，无需额外设备；<br/>
+• 轻量部署，CPU占用&lt;15%，3秒内完成检测反馈；<br/>
+• 兼容86款主流摄像头，适用于家庭、商用、出行等多场景。  </p>
+<h2>产品创新性</h2>
+<p><img alt="alt text" src="image-10.png"/></p>
+<h3>基于流量的摄像头检测</h3>
+<p>• 创新点：不依赖红外或电磁传感器，完全通过分析网络流量特征（如PLD特征、带宽稳定性等）来检测隐蔽摄像头。<br/>
+• 优势：摆脱硬件依赖，能适应更多环境场景和设备类型。  </p>
+<h3>基于移动性的摄像头定位</h3>
+<p>• 创新点：通过人体移动引发的比特率波动，判断摄像头的方向与距离，实现精确定位。<br/>
+• 优势：为市面上现有产品所缺乏的功能，提升了实际可用性和可操作性。  </p>
+<h3>实现移动端一体化感知与定位</h3>
+<p>• 创新点：将检测与定位功能集成到智能手机App中，用户无需额外设备。<br/>
+• 优势：显著提升了使用便利性，具备良好的用户体验与部署推广能力。  </p>
+<h2>市场对比优势（竞品分析）</h2>
+<p><img alt="alt text" src="image-11.png"/></p>
+<h2>应用场景与社会价值</h2>
+<p>• 酒店/民宿隐私检测：住客可自查房间，避免偷拍；<br/>
+• 办公/会议室安全巡查：规避机密信息泄露；<br/>
+• 学校/浴室/更衣室等重点区域防护：辅助管理者排查可疑设备；<br/>
+• 助力政策监管与执法排查：技术可嵌入监管平台，提高执法效率。  </p>
+<h2>作品价值与展望</h2>
+<p>CamDetector 以轻量化、高准确率、强定位能力为核心优势，真正将隐私防护落地到个人终端，具备广泛的商业拓展前景和社会治理价值，填补了国内外在“加密摄像头检测”与“无设备定位”方面的技术空白，是智慧安防领域的一项重要技术突破。</p>
+<h2>如何运行我们的项目</h2>
+<p>这是一个使用 <a href="https://nextjs.org/docs/app/api-reference/cli/create-next-app"><code>create-next-app</code></a> 脚手架创建的 <a href="https://nextjs.org">Next.js</a> 项目。</p>
+<h3>🚀 快速开始</h3>
+<p>首先，运行开发服务器：</p>
+<blockquote>
+    <p>
+    npm run dev<br>
+    或者 yarn dev<br>
+    或者 pnpm dev<br>
+    或者 bun dev
+    </p>
+  </blockquote>
+  
+<p>然后在浏览器中打开 <a href="http://localhost:3000">http://localhost:3000</a> 查看效果。</p>
+<p>你可以通过修改 <code>app/page.tsx</code> 文件来开始编辑页面。页面会在你修改后自动更新。</p>
+<p>本项目使用 <a href="https://nextjs.org/docs/app/building-your-application/optimizing/fonts"><code>next/font</code></a> 自动优化并加载 <a href="https://vercel.com/font">Geist 字体</a>，这是由 Vercel 推出的一款新字体。</p>
+<h3>📚 了解更多</h3>
+<p>想进一步了解 Next.js，可以查看以下资源：</p>
+<ul>
+<li><a href="https://nextjs.org/docs">Next.js 官方文档</a> - 了解 Next.js 的功能与 API。</li>
+<li><a href="https://nextjs.org/learn">Learn Next.js</a> - 一套交互式的 Next.js 教程。</li>
+</ul>
+<p>你还可以查看 <a href="https://github.com/vercel/next.js">Next.js 的 GitHub 仓库</a> —— 欢迎反馈和贡献！</p>
+<h3>☁️ 在 Vercel 上部署</h3>
+<p>部署 Next.js 应用最简单的方式是使用由 Next.js 团队创建的 <a href="https://vercel.com/new?utm_medium=default-template&amp;filter=next.js&amp;utm_source=create-next-app&amp;utm_campaign=create-next-app-readme">Vercel 平台</a>。</p>
+<p>查看我们的 <a href="https://nextjs.org/docs/app/building-your-application/deploying">Next.js 部署文档</a> 了解更多详情。</p></div>
+</body>
+
+</html>
