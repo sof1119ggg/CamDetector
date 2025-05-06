@@ -94,4 +94,42 @@
 ## 作品价值与展望
 CamDetector 以轻量化、高准确率、强定位能力为核心优势，真正将隐私防护落地到个人终端，具备广泛的商业拓展前景和社会治理价值，填补了国内外在“加密摄像头检测”与“无设备定位”方面的技术空白，是智慧安防领域的一项重要技术突破。
 
+## 如何运行我们的项目
+这是一个使用 [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) 脚手架创建的 [Next.js](https://nextjs.org) 项目。
+
+### 🚀 快速开始
+
+首先，运行开发服务器：
+
+```bash
+npm run dev
+# 或者
+yarn dev
+# 或者
+pnpm dev
+# 或者
+bun dev
+```
+
+然后在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看效果。
+
+你可以通过修改 `app/page.tsx` 文件来开始编辑页面。页面会在你修改后自动更新。
+
+本项目使用 [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) 自动优化并加载 [Geist 字体](https://vercel.com/font)，这是由 Vercel 推出的一款新字体。
+
+### 📚 了解更多
+
+想进一步了解 Next.js，可以查看以下资源：
+
+- [Next.js 官方文档](https://nextjs.org/docs) - 了解 Next.js 的功能与 API。
+- [Learn Next.js](https://nextjs.org/learn) - 一套交互式的 Next.js 教程。
+
+你还可以查看 [Next.js 的 GitHub 仓库](https://github.com/vercel/next.js) —— 欢迎反馈和贡献！
+
+### ☁️ 在 Vercel 上部署
+
+部署 Next.js 应用最简单的方式是使用由 Next.js 团队创建的 [Vercel 平台](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)。
+
+查看我们的 [Next.js 部署文档](https://nextjs.org/docs/app/building-your-application/deploying) 了解更多详情。
+
 
